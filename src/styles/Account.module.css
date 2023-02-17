@@ -1,0 +1,15 @@
+.form__widget {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0.5rem auto;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 700px) {
+  .form__widget {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem auto;
+  }
+}

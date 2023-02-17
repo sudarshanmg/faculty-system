@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Avatar from './Avatar';
+import classes from '../styles/Account.module.css';
+import Layout from './Layout';
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient();
@@ -111,20 +113,17 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className="form-widget">
-      <div className="form-widget">
-        {/* Add to the body */}
-        <Avatar
-          uid={user.id}
-          url={avatar_url}
-          size={150}
-          onUpload={(url) => {
-            setAvatarUrl(url);
-            updateProfile({ username, avatar_url: url, mobile, experience });
-          }}
-        />
-        {/* ... */}
-      </div>
+    <div>
+      <Avatar
+        uid={user.id}
+        url={avatar_url}
+        size={150}
+        onUpload={(url) => {
+          setAvatarUrl(url);
+          updateProfile({ username, avatar_url: url, mobile, experience });
+        }}
+      />
+
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />

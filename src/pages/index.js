@@ -1,14 +1,15 @@
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Account from '../components/Account';
+import Layout from '@/components/Layout';
 
 const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
 
   return (
-    <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      <h1 style={{textAlign: 'center'}}>Faculty Information System</h1>
+    <div className="container">
+      <h1 style={{ textAlign: 'center' }}>Faculty Information System</h1>
       {!session ? (
         <Auth
           supabaseClient={supabase}
