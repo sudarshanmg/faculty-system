@@ -8,6 +8,7 @@ const Home = () => {
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
+      <h1 style={{textAlign: 'center'}}>Faculty Information System</h1>
       {!session ? (
         <Auth
           supabaseClient={supabase}
