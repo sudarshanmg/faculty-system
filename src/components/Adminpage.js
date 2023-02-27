@@ -7,10 +7,7 @@ const Adminpage = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    if (sessionStorage.getItem('signedIn') !== 'true') {
-      router.replace('/');
 
-    }
     const fetchUsers = async () => {
       const { data, error } = await supabaseAdmin
         .from('profiles')
