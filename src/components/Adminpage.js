@@ -17,7 +17,7 @@ const Adminpage = () => {
         .select('username, aadhaar');
       if (data) {
         setUsers(users);
-        console.log(users);
+        console.log(data);
       }
     };
     fetchUsers();

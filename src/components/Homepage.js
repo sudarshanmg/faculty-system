@@ -6,17 +6,34 @@ import { useUser } from '@supabase/auth-helpers-react';
 
 const Homepage = ({ session }) => {
   const user = useUser();
+  console.log('rendering');
+  useEffect(() => {
+    supabaseAdmin.auth.onAuthStateChange(async (event, session) => {
+      if (event == 'PASSWORD_RECOVERY') {
+        const newPassword = prompt(
+          'What would you like your new password to be?'
+        );
+        const { data, error } = await supabaseAdmin.auth.updateUser({
+          password: newPassword,
+        });
 
+        if (data) alert('Password updated successfully!');
+        if (error) alert('There was an error updating your password.');
+      }
+    });
+  }, []);
   const updatePasswordHandler = async () => {
-    const newPassword = prompt('Enter your new password');
+    // const newPassword = prompt('Enter your new password');
     try {
-      const { data, error } = await supabaseAdmin.auth.updateUser({
-        password: newPassword,
-      });
-      if(!error) {
-        alert("Password updated successfully!");
-      } if(error) {
-        console.log(error)
+      let { data, error } = await supabaseAdmin.auth.resetPasswordForEmail(
+        user.email
+      );
+
+      if (!error) {
+        alert('Check your email');
+      }
+      if (error) {
+        console.log(error);
       }
     } catch (error) {
       console.log(error);
@@ -37,7 +54,7 @@ const Homepage = ({ session }) => {
         <Link href={'/home/qualifications'}>Qualifications</Link>
         <button onClick={updatePasswordHandler}>Update Password</button>
       </div>
-      <Account session={session} />
+       <Account session={session} />
     </div>
   );
 };

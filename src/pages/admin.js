@@ -6,11 +6,12 @@ const Admin = () => {
   const [auth, setAuth] = useState(false);
   const authenticateAdmin = async (e) => {
     e.preventDefault();
+    const password = passwInputRef.current.value;
     try {
       const data = await fetch('/api/adminAuth', {
         method: 'POST',
         body: JSON.stringify({
-          password: passwInputRef.current.value,
+          password,
         }),
         headers: {
           'Content-Type': 'application/json',
@@ -19,8 +20,8 @@ const Admin = () => {
       const response = await data.json();
       if (data.ok) {
         if (response.auth === 'success') {
-          sessionStorage.setItem('signedIn', 'true');
           setAuth(true);
+          sessionStorage.setItem('signedIn', 'true');
         }
       }
     } catch (error) {
