@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   try {
     const { data, error } = await supabaseAdmin.from('admin').select('passw');
     if (data) {
-      res.json({auth: 'ok'});
+      res.send({auth: 'ok'});
     }
   } catch (error) {
     console.log(error);
