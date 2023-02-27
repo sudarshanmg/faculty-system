@@ -15,6 +15,8 @@ const Homepage = ({ session }) => {
       });
       if(!error) {
         alert("Password updated successfully!");
+      } if(error) {
+        console.log(error)
       }
     } catch (error) {
       console.log(error);
