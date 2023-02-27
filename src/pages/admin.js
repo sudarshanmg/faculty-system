@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Adminpage from '@/components/adminpage';
+import Adminpage from '@/components/Adminpage';
 
 const Admin = () => {
   const passwInputRef = useRef();
