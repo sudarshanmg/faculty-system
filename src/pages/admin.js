@@ -8,7 +8,7 @@ const Admin = () => {
     e.preventDefault();
     const password = passwInputRef.current.value;
     try {
-      const data = await fetch('/api/adminAuth', {
+      const data = await fetch('api/adminAuth', {
         method: 'POST',
         body: JSON.stringify({
           password,
