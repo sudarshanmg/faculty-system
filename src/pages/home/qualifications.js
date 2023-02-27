@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import {
   useUser,
   useSupabaseClient,
   useSession,
-} from '@supabase/auth-helpers-react';
-import Layout from '@/components/Layout';
-import Degree from '@/components/Degree';
-import Router from 'next/router';
+} from "@supabase/auth-helpers-react";
+import Layout from "@/components/Layout";
+import Degree from "@/components/Degree";
+import Router from "next/router";
+import Research from "@/components/Research";
 
 export default function Qualifications() {
   const router = useRouter();
@@ -30,9 +31,9 @@ export default function Qualifications() {
       setLoading(true);
 
       let { data, error, status } = await supabase
-        .from('qualifications')
+        .from("qualifications")
         .select(`id, degree, subject, university, passing_year`)
-        .eq('user_id', user.id);
+        .eq("user_id", user.id);
 
       if (error && status !== 406) {
         throw error;
@@ -59,14 +60,14 @@ export default function Qualifications() {
       };
 
       const { data, error } = await supabase
-        .from('qualifications')
+        .from("qualifications")
         .insert([updates]);
 
       if (error) throw error;
-      alert('New degree added successfully!');
+      alert("New degree added successfully!");
       router.reload(window.location.pathname);
     } catch (error) {
-      alert('Error updating the data!');
+      alert("Error updating the data!");
       console.log(error);
     } finally {
       setLoading(false);
@@ -74,9 +75,9 @@ export default function Qualifications() {
   };
 
   return (
-    <div style={{ margin: '1rem' }}>
-      <h2>Add New Qualification</h2>
-      <div>
+    <div style={{ margin: "1rem" }}>
+      <h2 className="head_center">Add New Qualification</h2>
+      <div className="container">
         <label htmlFor="degree">Degree</label>
         <input
           type="text"
@@ -107,7 +108,7 @@ export default function Qualifications() {
         />
         <button
           type="submit"
-          style={{ margin: '1rem auto' }}
+          style={{ margin: "1rem auto" }}
           onClick={() =>
             addQualification({
               degree,
@@ -117,10 +118,10 @@ export default function Qualifications() {
             })
           }
         >
-          {loading ? 'Loading ...' : 'Insert'}
+          {loading ? "Loading ..." : "Insert"}
         </button>
       </div>
-      <h1>Degrees</h1>
+      <h1 className="head_center">Degrees</h1>
       {<Degree degrees={storedDegrees} />}
     </div>
   );
