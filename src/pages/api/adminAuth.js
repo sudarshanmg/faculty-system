@@ -7,11 +7,7 @@ export default async function handler(req, res) {
   try {
     const { data, error } = await supabaseAdmin.from('admin').select('passw');
     if (data) {
-      if (data[0].passw === password) {
-        res.json({ auth: 'success' });
-      } else {
-        res.redirect('/');
-      }
+      res.json({auth: 'ok'});
     }
   } catch (error) {
     console.log(error);

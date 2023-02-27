@@ -17,12 +17,8 @@ const Admin = () => {
           'Content-Type': 'application/json',
         },
       });
-      const response = await data.json();
-      if (data.ok) {
-        if (response.auth === 'success') {
-          setAuth(true);
-          sessionStorage.setItem('signedIn', 'true');
-        }
+      if(data.ok) {
+        console.log("data", data);
       }
     } catch (error) {
       console.log(error);
