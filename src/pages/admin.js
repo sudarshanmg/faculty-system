@@ -8,7 +8,7 @@ const Admin = () => {
     e.preventDefault();
     const password = passwInputRef.current.value;
     try {
-      const data = await fetch('api/adminAuth', {
+      const response = await fetch('api/adminAuth', {
         method: 'POST',
         body: JSON.stringify({
           password,
@@ -17,7 +17,8 @@ const Admin = () => {
           'Content-Type': 'application/json',
         },
       });
-      if(data.ok) {
+      const data = await response.json();
+      if(response.ok) {
         console.log("data", data);
       }
     } catch (error) {
