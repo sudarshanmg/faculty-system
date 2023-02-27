@@ -13,7 +13,7 @@ const Admin = () => {
     if(data[0].pass === passwInputRef.current.value) {
       setAuth(true);
     } else {
-      router.replace('/');
+      console.log('wrong passw');
     }
   };
   return (
