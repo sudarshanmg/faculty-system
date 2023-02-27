@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import supabaseAdmin from '@/lib/supabaseAdmin';
 import Adminpage from '@/components/Adminpage';
 import { useRouter } from 'next/router';
@@ -7,11 +7,17 @@ const Admin = () => {
   const passwInputRef = useRef();
   const router = useRouter();
   const [auth, setAuth] = useState(false);
-  const [pass, setPass] = useState([]);
+
+  useEffect(() => {
+    const signedIn = sessionStorage.getItem('signedIn');
+    setAuth(signedIn);
+  }, []);
+
   const authenticateAdmin = async () => {
     let { data, error } = await supabaseAdmin.from('elevate').select('*');
-    if(data[0].pass === passwInputRef.current.value) {
+    if (data[0].pass === passwInputRef.current.value) {
       setAuth(true);
+      sessionStorage.setItem('signedIn', 'true');
     } else {
       console.log('wrong passw');
     }
