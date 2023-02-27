@@ -1,0 +1,25 @@
+.degree__container {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--custom-border-radius);
+  border: var(--custom-border);
+  margin: 1rem auto;
+
+}
+
+.button {
+    border: var(--custom-border);   
+    width: fit-content;
+}
+
+.degree__title {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #666;
+}
+
+.degree__name {
+    margin: 0.3rem auto;
+    font-weight: 700;
+}

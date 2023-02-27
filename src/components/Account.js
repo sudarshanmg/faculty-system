@@ -113,14 +113,28 @@ export default function Account({ session }) {
   }
 
   return (
-    <div>
+    <div style={{margin: '1rem auto'}}>
       <Avatar
         uid={user.id}
         url={avatar_url}
         size={150}
         onUpload={(url) => {
           setAvatarUrl(url);
-          updateProfile({ username, avatar_url: url, mobile, experience });
+          updateProfile({
+            username,
+            avatar_url: url,
+            mobile,
+            aadhaar,
+            experience,
+            dob,
+            sex,
+            religion,
+            community,
+            joining_date,
+            department,
+            residence,
+            pan,
+          });
         }}
       />
 
