@@ -1,24 +1,24 @@
-import Link from 'next/link';
-import Account from './Account';
-import { useEffect } from 'react';
-import supabaseAdmin from '@/lib/supabaseAdmin';
-import { useUser } from '@supabase/auth-helpers-react';
+import Link from "next/link";
+import Account from "./Account";
+import { useEffect } from "react";
+import supabaseAdmin from "@/lib/supabaseAdmin";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const Homepage = ({ session }) => {
   const user = useUser();
-  console.log('rendering');
+  console.log("rendering");
   useEffect(() => {
     supabaseAdmin.auth.onAuthStateChange(async (event, session) => {
-      if (event == 'PASSWORD_RECOVERY') {
+      if (event == "PASSWORD_RECOVERY") {
         const newPassword = prompt(
-          'What would you like your new password to be?'
+          "What would you like your new password to be?"
         );
         const { data, error } = await supabaseAdmin.auth.updateUser({
           password: newPassword,
         });
 
-        if (data) alert('Password updated successfully!');
-        if (error) alert('There was an error updating your password.');
+        if (data) alert("Password updated successfully!");
+        if (error) alert("There was an error updating your password.");
       }
     });
   }, []);
@@ -30,14 +30,14 @@ const Homepage = ({ session }) => {
       );
 
       if (!error) {
-        alert('Check your email');
+        alert("Check your email");
       }
       if (error) {
         console.log(error);
       }
     } catch (error) {
       console.log(error);
-      alert('Something went wrong!');
+      alert("Something went wrong!");
     }
   };
 
@@ -45,16 +45,17 @@ const Homepage = ({ session }) => {
     <div>
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <div>Homepage</div>
-        <Link href={'/home/qualifications'}>Qualifications</Link>
+        <Link href={"/home/qualifications"}>Qualifications</Link>
+        <Link href={"/home/journals"}>Journals</Link>
         <button onClick={updatePasswordHandler}>Update Password</button>
       </div>
-       <Account session={session} />
+      <Account session={session} />
     </div>
   );
 };
