@@ -1,46 +1,37 @@
 import { useRef, useState } from 'react';
+import supabaseAdmin from '@/lib/supabaseAdmin';
 import Adminpage from '@/components/Adminpage';
+import { useRouter } from 'next/router';
 
 const Admin = () => {
   const passwInputRef = useRef();
+  const router = useRouter();
   const [auth, setAuth] = useState(false);
-  const authenticateAdmin = async (e) => {
-    e.preventDefault();
-    const password = passwInputRef.current.value;
-    try {
-      const response = await fetch('api/adminAuth', {
-        method: 'POST',
-        body: JSON.stringify({
-          password,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
-      if(response.ok) {
-        console.log("data", data);
-      }
-    } catch (error) {
-      console.log(error);
+  const [pass, setPass] = useState([]);
+  const authenticateAdmin = async () => {
+    let { data, error } = await supabaseAdmin.from('elevate').select('*');
+    if(data[0].pass === passwInputRef.current.value) {
+      setAuth(true);
+    } else {
+      router.replace('/');
     }
   };
   return (
     <div className="container" style={{ margin: '1rem auto' }}>
       <h1>Welcome Admin</h1>
-      {!auth && <form action="" method="post">
-        <label htmlFor="password">Enter password</label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          ref={passwInputRef}
-        />
-        <button onClick={authenticateAdmin}>Submit</button>
-      </form>}
-      <div style={{ margin: '1rem auto' }}>
-        {auth && <Adminpage />}
-      </div>
+      {!auth && (
+        <>
+          <label htmlFor="password">Enter password</label>
+          <input
+            type="text"
+            name="password"
+            id="password"
+            ref={passwInputRef}
+          />
+          <button onClick={() => authenticateAdmin()}>Submit</button>
+        </>
+      )}
+      <div style={{ margin: '1rem auto' }}>{auth && <Adminpage />}</div>
     </div>
   );
 };
