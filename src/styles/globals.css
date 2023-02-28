@@ -11,6 +11,7 @@ body {
   --custom-border: 1px solid #333;
   --custom-border-radius: 5px;
   --custom-spacing: 5px;
+  --custom-color-danger: #e4484c;
 
   padding: 0;
   margin: 0;
@@ -43,7 +44,7 @@ body,
   position: relative;
   width: 100%;
 }
-.row [class^="col"] {
+.row [class^='col'] {
   float: left;
   margin: 0.5rem 2%;
   min-height: 0.125rem;
@@ -99,7 +100,7 @@ body,
   width: 96%;
 }
 .row::after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -290,6 +291,10 @@ button.primary,
 .button.primary {
   background-color: var(--custom-color-brand);
   border: 1px solid var(--custom-color-brand);
+}
+
+button.danger {
+  background-color: var(--custom-color-danger);
 }
 
 /* Widgets */

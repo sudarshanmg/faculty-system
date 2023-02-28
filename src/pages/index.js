@@ -18,7 +18,7 @@ const Home = () => {
             appearance={{ theme: ThemeSupa }}
             theme="dark"
           />
-          <Link href={'/admin'}>Admin?</Link>
+          <Link href={'/admin/admin'}>Admin?</Link>
         </>
       ) : (
         <Homepage session={session} />

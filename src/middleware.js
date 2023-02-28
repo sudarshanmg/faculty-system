@@ -12,8 +12,9 @@ export async function middleware(req) {
   } = await supabase.auth.getSession();
 
   // Check auth condition
-  if (session?.user.email?.endsWith('@gmail.com')) {
+  if (session?.user.email) {
     // Authentication successful, forward request to protected route.
+
     return res;
   }
 
