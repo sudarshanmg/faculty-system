@@ -53,6 +53,8 @@ const Homepage = ({ session }) => {
         <div>Homepage</div>
         <Link href={"/home/qualifications"}>Qualifications</Link>
         <Link href={"/home/journals"}>Journals</Link>
+        <Link href={"/home/conferences"}>Conferences</Link>
+        <Link href={"/home/documents"}>Documents</Link>
         <button onClick={updatePasswordHandler}>Update Password</button>
       </div>
       <Account session={session} />

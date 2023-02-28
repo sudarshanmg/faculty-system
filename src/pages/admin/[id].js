@@ -1,7 +1,11 @@
-import { useRouter } from 'next/router';
-import supabaseAdmin from '@/lib/supabaseAdmin';
-import { useEffect, useState } from 'react';
-import classes from '../../styles/Degree.module.css';
+import { useRouter } from "next/router";
+import supabaseAdmin from "@/lib/supabaseAdmin";
+import { useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
+import supabaseAdmin from "@/lib/supabaseAdmin";
+import { useEffect, useState } from "react";
+import classes from "../../styles/Degree.module.css";
 
 const User = ({ id }) => {
   const [facultyDetails, setFacultyDetails] = useState({});
@@ -10,18 +14,19 @@ const User = ({ id }) => {
     const getFacultyDetails = async (id) => {
       try {
         let { data, error, status } = await supabaseAdmin
-          .from('profiles')
+          .from("profiles")
           .select(`*`)
-          .eq('id', id);
+          .eq("id", id);
 
         if (error && status !== 406) {
           throw error;
         }
         if (data) {
           console.log(data);
-          setFacultyDetails(() => {return data});
+          setFacultyDetails(() => {
+            return data;
+          });
           console.log(facultyDetails);
-
         }
       } catch (error) {
         console.log(error);
@@ -31,7 +36,7 @@ const User = ({ id }) => {
     getFacultyDetails(id);
   }, []);
   console.log(id);
-  return <div>{'admin'}</div>;
+  return <div>{"admin"}</div>;
 };
 
 export default User;
@@ -39,7 +44,7 @@ export default User;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: 'blocking', // can also be true or 'blocking'
+    fallback: "blocking", // can also be true or 'blocking'
   };
 }
 export async function getStaticProps(context) {
