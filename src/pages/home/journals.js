@@ -9,6 +9,7 @@ import Layout from "@/components/Layout";
 import Degree from "@/components/Degree";
 import Router from "next/router";
 import Research from "@/components/Research";
+import Link from "next/link";
 
 export default function Journals() {
   const router = useRouter();
@@ -72,47 +73,64 @@ export default function Journals() {
   };
 
   return (
-    <div style={{ margin: "1rem" }}>
-      <h2 className="head_center">Add New Journal</h2>
-      <div className="container">
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <label htmlFor="year">Year</label>
-        <input
-          type="number"
-          name="year"
-          id="year"
-          onChange={(e) => setYear(e.target.value)}
-        />
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button
-          type="submit"
-          style={{ margin: "1rem auto" }}
-          onClick={() =>
-            addJournal({
-              title,
-              name,
-              year,
-            })
-          }
-        >
-          {loading ? "Loading ..." : "Insert"}
-        </button>
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "4em auto",
+        }}
+        className="container"
+      >
+        <Link href={"/"}>Homepage</Link>
+        <Link href={"/home/qualifications"}>Qualifications</Link>
+        <Link href={"/home/journals"}>Journals</Link>
+        <Link href={"/home/conferences"}>Conferences</Link>
+        <Link href={"/home/documents"}>Documents</Link>
       </div>
+      <div style={{ margin: "1rem" }}>
+        <h2 className="head_center">Add New Journal</h2>
+        <div className="container">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <label htmlFor="year">Year</label>
+          <input
+            type="number"
+            name="year"
+            id="year"
+            onChange={(e) => setYear(e.target.value)}
+          />
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button
+            type="submit"
+            style={{ margin: "1rem auto" }}
+            onClick={() =>
+              addJournal({
+                title,
+                name,
+                year,
+              })
+            }
+          >
+            {loading ? "Loading ..." : "Insert"}
+          </button>
+        </div>
 
-      <h1 className="head_center">Journals</h1>
-      <Research journals={storedJournals} />
-    </div>
+        <h1 className="head_center">Journals</h1>
+        <Research journals={storedJournals} />
+      </div>
+    </>
   );
 }
