@@ -5,9 +5,6 @@ import {
   useSupabaseClient,
   useSession,
 } from "@supabase/auth-helpers-react";
-import Layout from "@/components/Layout";
-import Degree from "@/components/Degree";
-import Router from "next/router";
 import Conference from "../../components/Conference";
 import Link from "next/link";
 
