@@ -3,13 +3,13 @@ import { useRouter } from "next/router";
 
 import classes from "../styles/Box.module.css";
 
-const Journal = (props) => {
+const Conference = (props) => {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const deleteHandler = async (id) => {
     try {
       const { data, error } = await supabase
-        .from("journals")
+        .from("conferences")
         .delete()
         .eq("id", id);
       if (!error) {
@@ -25,26 +25,26 @@ const Journal = (props) => {
     }
   };
 
-  const journals = props.journals.map((journal) => (
-    <div className={`container ${classes.degree__container}`} key={journal.id}>
+  const conference = props.confs.map((conf) => (
+    <div className={`container ${classes.degree__container}`} key={conf.id}>
       <div style={{ margin: "1rem" }}>
         <div style={{ margin: "1rem auto" }}>
           <h2 className={classes.degree__title}>Title</h2>
-          <h2 className={classes.degree__name}>{journal.title}</h2>
+          <h2 className={classes.degree__name}>{conf.title}</h2>
         </div>
         <div style={{ margin: "1rem auto" }}>
           <h2 className={classes.degree__title}>Name</h2>
-          <h2 className={classes.degree__name}>{journal.name}</h2>
+          <h2 className={classes.degree__name}>{conf.name}</h2>
         </div>
         <div style={{ margin: "1rem auto" }}>
           <h2 className={classes.degree__title}>Year</h2>
-          <h2 className={classes.degree__name}>{journal.year}</h2>
+          <h2 className={classes.degree__name}>{conf.year}</h2>
         </div>
 
         <button
           className="button primary block"
           onClick={() => {
-            deleteHandler(journal.id);
+            deleteHandler(conf.id);
           }}
         >
           Delete
@@ -53,7 +53,7 @@ const Journal = (props) => {
     </div>
   ));
 
-  return <div>{journals}</div>;
+  return <div>{conference}</div>;
 };
 
-export default Journal;
+export default Conference;
