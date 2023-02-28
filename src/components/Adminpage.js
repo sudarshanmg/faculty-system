@@ -1,18 +1,23 @@
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import supabaseAdmin from '@/lib/supabaseAdmin';
 import { useEffect, useState } from 'react';
 import classes from '../styles/Degree.module.css';
 import ProfileDetails from './ProfileDetails';
 import Avatar from './Avatar';
+import { setUid } from '@/store/uidSlice';
 
 const Adminpage = () => {
   const router = useRouter();
+  const uid = useSelector((state) => state.uid.value);
+
+  const dispatch = useDispatch();
   const [users, setUsers] = useState();
   const [showDetails, setShowDetails] = useState(false);
   const [allDetails, setAllDetails] = useState([]);
   const [viewFaculties, setViewFaculties] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState();
-  const [uid, setUid] = useState();
+  // const [uid, setUid] = useState();
 
   const completeDetailsHandler = (user) => {
     setShowDetails(true);
@@ -23,11 +28,12 @@ const Adminpage = () => {
       details.push(
         <ProfileDetails key={i} objKey={key} objValue={user[key]} />
       );
-      setUid(user.id);
+      dispatch(setUid(user.id));
       setAvatarUrl(user.avatar_url);
       i++;
     }
     setAllDetails(details);
+    router.push(`/admin/${uid}`);
   };
 
   const viewFacultiesHandler = async () => {
