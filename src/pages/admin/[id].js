@@ -2,6 +2,11 @@ import { useRouter } from "next/router";
 import supabaseAdmin from "@/lib/supabaseAdmin";
 import { useEffect, useState } from "react";
 
+import { useRouter } from "next/router";
+import supabaseAdmin from "@/lib/supabaseAdmin";
+import { useEffect, useState } from "react";
+import classes from "../../styles/Degree.module.css";
+
 const User = ({ id }) => {
   const [facultyDetails, setFacultyDetails] = useState({});
 
