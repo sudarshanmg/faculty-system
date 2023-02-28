@@ -29,7 +29,7 @@ const User = () => {
     };
     getFacultyDetails(uid);
   }, []);
-  console.log(id);
+
   return <div>{"admin"}</div>;
 };
 
