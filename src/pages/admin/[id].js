@@ -172,6 +172,7 @@ const User = () => {
         </div>
       </div>
       <div>
+        {/* teat */}
         <h1 className="head_center">Qualifications</h1>
         {facultyQualifications?.map((degree) => (
           <DegreeAdmin key={degree.id} degree={degree} />
