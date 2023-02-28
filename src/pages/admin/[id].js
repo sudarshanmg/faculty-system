@@ -12,9 +12,9 @@ const User = () => {
     const getFacultyDetails = async (id) => {
       try {
         let { data, error, status } = await supabaseAdmin
-          .from('profiles')
+          .from("profiles")
           .select(`*`)
-          .eq('id', id);
+          .eq("id", id);
 
         if (error && status !== 406) {
           throw error;
@@ -29,8 +29,8 @@ const User = () => {
     };
     getFacultyDetails(uid);
   }, []);
-
-  return <div>{'admin'}</div>;
+  console.log(id);
+  return <div>{"admin"}</div>;
 };
 
 export default User;
