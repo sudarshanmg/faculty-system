@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
-import supabaseAdmin from "@/lib/supabaseAdmin";
-import { useEffect, useState } from "react";
-import classes from "../styles/Box.module.css";
-import ProfileDetails from "./ProfileDetails";
-import Avatar from "./Avatar";
+import { useRouter } from 'next/router';
+import supabaseAdmin from '@/lib/supabaseAdmin';
+import { useEffect, useState } from 'react';
+import classes from '../styles/Degree.module.css';
+import ProfileDetails from './ProfileDetails';
+import Avatar from './Avatar';
 
 const Adminpage = () => {
   const router = useRouter();
@@ -32,7 +32,7 @@ const Adminpage = () => {
 
   const viewFacultiesHandler = async () => {
     setShowDetails(false);
-    const { data, error } = await supabaseAdmin.from("profiles").select("*");
+    const { data, error } = await supabaseAdmin.from('profiles').select('*');
     if (data) {
       setUsers(
         data.map((user) => (
@@ -40,12 +40,12 @@ const Adminpage = () => {
             className={`container ${classes.degree__container}`}
             key={user.id}
           >
-            <div style={{ margin: "1rem" }}>
-              <div style={{ margin: "1rem auto" }}>
+            <div style={{ margin: '1rem' }}>
+              <div style={{ margin: '1rem auto' }}>
                 <h2 className={classes.degree__title}>Faculty</h2>
                 <h2 className={classes.degree__name}>{user.username}</h2>
               </div>
-              <div style={{ margin: "1rem auto" }}>
+              <div style={{ margin: '1rem auto' }}>
                 <h2 className={classes.degree__title}>Mobile</h2>
                 <h2 className={classes.degree__name}>{user.mobile}</h2>
               </div>
@@ -72,7 +72,7 @@ const Adminpage = () => {
         alert(error);
       }
       if (data) {
-        alert("Faculty deleted successfully!");
+        alert('Faculty deleted successfully!');
       }
     } catch (error) {
       console.log(error);
@@ -84,7 +84,7 @@ const Adminpage = () => {
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {/* Options */}
         <button onClick={viewFacultiesHandler}>View Faculties</button>
         <button onClick={viewPublicationsHandler}>View Publications</button>
@@ -97,8 +97,8 @@ const Adminpage = () => {
       {/* Faculty details */}
       {showDetails && (
         <div className={`container ${classes.degree__container}`}>
-          <div style={{ margin: "1rem" }}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{ margin: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Avatar uid={uid} url={avatarUrl} hideUpload={true} />
             </div>
             {allDetails}

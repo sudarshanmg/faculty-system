@@ -6,7 +6,7 @@ import {
   useSession,
 } from "@supabase/auth-helpers-react";
 import Degree from "@/components/Degree";
-import Link from "next/link";
+
 
 export default function Qualifications() {
   const router = useRouter();
@@ -73,71 +73,54 @@ export default function Qualifications() {
   };
 
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "4em auto",
-        }}
-        className="container"
-      >
-        <Link href={"/"}>Homepage</Link>
-        <Link href={"/home/qualifications"}>Qualifications</Link>
-        <Link href={"/home/journals"}>Journals</Link>
-        <Link href={"/home/conferences"}>Conferences</Link>
-        <Link href={"/home/documents"}>Documents</Link>
+    <div style={{ margin: "1rem" }}>
+      <h2 className="head_center">Add New Qualification</h2>
+      <div className="container">
+        <label htmlFor="degree">Degree</label>
+        <input
+          type="text"
+          name="degree"
+          id="degree"
+          onChange={(e) => setDegree(e.target.value)}
+        />
+        <label htmlFor="subject">subject</label>
+        <input
+          type="text"
+          name="subject"
+          id="subject"
+          onChange={(e) => setSubject(e.target.value)}
+        />
+        <label htmlFor="year">Year of Passing</label>
+        <input
+          type="number"
+          name="year"
+          id="year"
+          onChange={(e) => setYear(e.target.value)}
+        />
+        <label htmlFor="university">University</label>
+        <input
+          type="text"
+          name="university"
+          id="university"
+          onChange={(e) => setUniversity(e.target.value)}
+        />
+        <button
+          type="submit"
+          style={{ margin: "1rem auto" }}
+          onClick={() =>
+            addQualification({
+              degree,
+              subject,
+              university,
+              year,
+            })
+          }
+        >
+          {loading ? "Loading ..." : "Insert"}
+        </button>
       </div>
-      <div style={{ margin: "1rem" }}>
-        <h2 className="head_center">Add New Qualification</h2>
-        <div className="container">
-          <label htmlFor="degree">Degree</label>
-          <input
-            type="text"
-            name="degree"
-            id="degree"
-            onChange={(e) => setDegree(e.target.value)}
-          />
-          <label htmlFor="subject">subject</label>
-          <input
-            type="text"
-            name="subject"
-            id="subject"
-            onChange={(e) => setSubject(e.target.value)}
-          />
-          <label htmlFor="year">Year of Passing</label>
-          <input
-            type="number"
-            name="year"
-            id="year"
-            onChange={(e) => setYear(e.target.value)}
-          />
-          <label htmlFor="university">University</label>
-          <input
-            type="text"
-            name="university"
-            id="university"
-            onChange={(e) => setUniversity(e.target.value)}
-          />
-          <button
-            type="submit"
-            style={{ margin: "1rem auto" }}
-            onClick={() =>
-              addQualification({
-                degree,
-                subject,
-                university,
-                year,
-              })
-            }
-          >
-            {loading ? "Loading ..." : "Insert"}
-          </button>
-        </div>
-        <h1 className="head_center">Degrees</h1>
-        {<Degree degrees={storedDegrees} />}
-      </div>
-    </>
+      <h1 className="head_center">Degrees</h1>
+      {<Degree degrees={storedDegrees} />}
+    </div>
   );
 }
