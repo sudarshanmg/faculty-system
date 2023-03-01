@@ -17,6 +17,11 @@ const User = () => {
   const router = useRouter();
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem("signedIn") !== "true") {
+        router.replace("/");
+      }
+    }
     const getFacultyDetails = async (id) => {
       try {
         let { data: profile, error: profile_error } = await supabaseAdmin
