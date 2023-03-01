@@ -44,7 +44,7 @@ body,
   position: relative;
   width: 100%;
 }
-.row [class^="col"] {
+.row [class^='col'] {
   float: left;
   margin: 0.5rem 2%;
   min-height: 0.125rem;
@@ -100,7 +100,7 @@ body,
   width: 96%;
 }
 .row::after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
@@ -358,6 +358,62 @@ button.danger {
 }
 .footer > div:nth-child(2) {
   justify-content: left;
+}
+/* Loader */
+.middle {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.bar {
+  width: 4px;
+  height: 20px;
+  background: transparent;
+  display: inline-block;
+  transform-origin: bottom center;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  /*   box-shadow:5px 10px 20px inset rgba(255,23,25.2); */
+  animation: loader 1.2s linear infinite;
+}
+.bar1 {
+  animation-delay: 0.1s;
+}
+.bar2 {
+  animation-delay: 0.2s;
+}
+.bar3 {
+  animation-delay: 0.3s;
+}
+.bar4 {
+  animation-delay: 0.4s;
+}
+.bar5 {
+  animation-delay: 0.5s;
+}
+.bar6 {
+  animation-delay: 0.6s;
+}
+.bar7 {
+  animation-delay: 0.7s;
+}
+.bar8 {
+  animation-delay: 0.8s;
+}
+
+@keyframes loader {
+  0% {
+    transform: scaleY(0.1);
+    background: none;
+  }
+  50% {
+    transform: scaleY(1);
+    background: var(--custom-color-brand);
+  }
+  100% {
+    transform: scaleY(0.1);
+    background: transparent;
+  }
 }
 
 @media only screen and (min-width: 60em) {
