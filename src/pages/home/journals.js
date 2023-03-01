@@ -21,6 +21,7 @@ export default function Journals() {
   const [title, setTitle] = useState(null);
   const [name, setName] = useState(null);
   const [year, setYear] = useState(null);
+  const [author, setAuthor] = useState(null);
   const [storedJournals, setStoredJournals] = useState([]);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function Journals() {
         title,
         name,
         year,
+        author,
       };
 
       const { data, error } = await supabase.from("journals").insert([updates]);
@@ -112,6 +114,13 @@ export default function Journals() {
             name="name"
             id="name"
             onChange={(e) => setName(e.target.value)}
+          />
+          <label htmlFor="author">Author</label>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            onChange={(e) => setAuthor(e.target.value)}
           />
           <button
             type="submit"

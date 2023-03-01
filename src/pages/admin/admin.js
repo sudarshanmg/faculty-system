@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import supabaseAdmin from '@/lib/supabaseAdmin';
-import Adminpage from '@/components/Adminpage';
-import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from "react";
+import supabaseAdmin from "@/lib/supabaseAdmin";
+import Adminpage from "@/components/Adminpage";
+import { useRouter } from "next/router";
 
 const Admin = () => {
   const passwInputRef = useRef();
@@ -9,35 +9,18 @@ const Admin = () => {
   const [auth, setAuth] = useState(false);
 
   useEffect(() => {
-    const signedIn = sessionStorage.getItem('signedIn');
-    setAuth(signedIn);
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem("signedIn") !== "true") {
+        router.replace("/");
+      }
+    }
   }, []);
 
-  const authenticateAdmin = async () => {
-    let { data, error } = await supabaseAdmin.from('elevate').select('*');
-    if (data[0].pass === passwInputRef.current.value) {
-      setAuth(true);
-      sessionStorage.setItem('signedIn', 'true');
-    } else {
-      console.log('wrong passw');
-    }
-  };
   return (
-    <div className="container" style={{ margin: '1rem auto' }}>
+    <div className="container" style={{ margin: "1rem auto" }}>
       <h1>Welcome Admin</h1>
-      {!auth && (
-        <>
-          <label htmlFor="password">Enter password</label>
-          <input
-            type="text"
-            name="password"
-            id="password"
-            ref={passwInputRef}
-          />
-          <button onClick={() => authenticateAdmin()}>Submit</button>
-        </>
-      )}
-      <div style={{ margin: '1rem auto' }}>{auth && <Adminpage />}</div>
+
+      <div style={{ margin: "1rem auto" }}>{<Adminpage />}</div>
     </div>
   );
 };

@@ -18,6 +18,7 @@ export default function Conferences() {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState(null);
   const [url, seturl] = useState(null);
+  const [owner, setOwner] = useState(null);
   const [storedDocuments, setStoredDocuments] = useState([]);
 
   useEffect(() => {
@@ -53,6 +54,7 @@ export default function Conferences() {
         user_id: user.id,
         title,
         url,
+        owner,
       };
 
       const { data, error } = await supabase
@@ -104,6 +106,15 @@ export default function Conferences() {
             id="url"
             onChange={(e) => {
               return seturl(e.target.value);
+            }}
+          />
+          <label htmlFor="owner">Owner</label>
+          <input
+            type="text"
+            name="owner"
+            id="url"
+            onChange={(e) => {
+              return setOwner(e.target.value);
             }}
           />
           <button
