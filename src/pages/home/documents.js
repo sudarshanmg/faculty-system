@@ -1,14 +1,15 @@
 //title
 //url
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   useUser,
   useSupabaseClient,
   useSession,
-} from "@supabase/auth-helpers-react";
-import Document from "../../components/Documents";
-import Link from "next/link";
+} from '@supabase/auth-helpers-react';
+import Document from '../../components/Documents';
+import Link from 'next/link';
+import styles from '../../styles/Options.module.css';
 
 export default function Conferences() {
   const router = useRouter();
@@ -30,9 +31,9 @@ export default function Conferences() {
       setLoading(true);
 
       let { data, error, status } = await supabase
-        .from("documents")
+        .from('documents')
         .select(`id, title, url`)
-        .eq("user_id", user.id);
+        .eq('user_id', user.id);
 
       if (error && status !== 406) {
         throw error;
@@ -58,14 +59,14 @@ export default function Conferences() {
       };
 
       const { data, error } = await supabase
-        .from("documents")
+        .from('documents')
         .insert([updates]);
 
       if (error) throw error;
-      alert("New Document added successfully!");
+      alert('New Document added successfully!');
       router.reload(window.location.pathname);
     } catch (error) {
-      alert("Error updating the data!");
+      alert('Error updating the data!');
       console.log(error);
     } finally {
       setLoading(false);
@@ -74,22 +75,30 @@ export default function Conferences() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "4em auto",
-        }}
-        className="container"
-      >
-        <Link href={"/"}>Homepage</Link>
-        <Link href={"/home/qualifications"}>Qualifications</Link>
-        <Link href={"/home/journals"}>Journals</Link>
-        <Link href={"/home/conferences"}>Conferences</Link>
-        <Link href={"/home/documents"}>Documents</Link>
+      <div className={styles.options__container}>
+        <div className={styles.option}>
+          <Link href={'/'}>Homepage</Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/qualifications'}>Qualifications</Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/journals'} className={styles.option}>
+            Journals
+          </Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/conferences'} className={styles.option}>
+            Conferences
+          </Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/documents'} className={styles.option}>
+            Documents
+          </Link>
+        </div>
       </div>
-      <div style={{ margin: "1rem" }}>
+      <div style={{ margin: '1rem' }}>
         <h2 className="head_center">Add New Document</h2>
         <div className="container">
           <label htmlFor="title">Title</label>
@@ -119,7 +128,7 @@ export default function Conferences() {
           />
           <button
             type="submit"
-            style={{ margin: "1rem auto" }}
+            style={{ margin: '1rem auto' }}
             onClick={() =>
               addDocument({
                 title,
@@ -127,7 +136,7 @@ export default function Conferences() {
               })
             }
           >
-            {loading ? "Loading ..." : "Insert"}
+            {loading ? 'Loading ...' : 'Insert'}
           </button>
         </div>
 

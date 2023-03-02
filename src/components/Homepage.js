@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import Account from './Account';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import supabaseAdmin from '@/lib/supabaseAdmin';
 import { useUser } from '@supabase/auth-helpers-react';
 import Loader from './Loader';
+import styles from '../styles/Options.module.css';
 
 const Homepage = ({ session }) => {
   const user = useUser();
@@ -34,20 +35,30 @@ const Homepage = ({ session }) => {
 
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div>Homepage</div>
-        <Link href={'/home/qualifications'}>Qualifications</Link>
-        <Link href={'/home/journals'}>Journals</Link>
-        <Link href={'/home/conferences'}>Conferences</Link>
-        <Link href={'/home/documents'}>Documents</Link>
+      <div className={styles.options__container}>
+        <div className={styles.option}>Homepage</div>
+        <div className={styles.option}>
+          <Link href={'/home/qualifications'}>Qualifications</Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/journals'} className={styles.option}>
+            Journals
+          </Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/conferences'} className={styles.option}>
+            Conferences
+          </Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/documents'} className={styles.option}>
+            Documents
+          </Link>
+        </div>
         {!isLoading && (
-          <button onClick={updatePasswordHandler}>{'Update Password'}</button>
+          <button onClick={updatePasswordHandler} className={styles.option}>
+            {'Update Password'}
+          </button>
         )}
         {isLoading && <Loader />}
       </div>

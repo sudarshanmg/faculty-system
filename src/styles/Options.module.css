@@ -1,6 +1,7 @@
 .options__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+
 }
 
 @media screen and (max-width: 700px) {
@@ -10,7 +11,8 @@
         justify-content: space-between;
     }
 
-    .options {
+    .option {
         margin-top: 1rem;
+        text-align: center;
     }
 }

@@ -7,6 +7,7 @@ import {
 } from "@supabase/auth-helpers-react";
 import Conference from "../../components/Conference";
 import Link from "next/link";
+import styles from '../../styles/Options.module.css';
 
 export default function Conferences() {
   const router = useRouter();
@@ -75,20 +76,28 @@ export default function Conferences() {
   return (
     <>
       {" "}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "4em auto",
-        }}
-        className="container"
-      >
-        <Link href={"/"}>Homepage</Link>
-        <Link href={"/home/qualifications"}>Qualifications</Link>
-        <Link href={"/home/journals"}>Journals</Link>
-        <Link href={"/home/conferences"}>Conferences</Link>
-        <Link href={"/home/documents"}>Documents</Link>
+      <div className={styles.options__container}>
+        <div className={styles.option}>
+          <Link href={'/'}>Homepage</Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/qualifications'}>Qualifications</Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/journals'} className={styles.option}>
+            Journals
+          </Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/conferences'} className={styles.option}>
+            Conferences
+          </Link>
+        </div>
+        <div className={styles.option}>
+          <Link href={'/home/documents'} className={styles.option}>
+            Documents
+          </Link>
+        </div>
       </div>
       <div style={{ margin: "1rem" }}>
         <h2 className="head_center">Add New Conference</h2>

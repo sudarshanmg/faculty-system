@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import supabaseAdmin from '@/lib/supabaseAdmin';
 import { useState } from 'react';
 import classes from '../styles/Degree.module.css';
-import styles from '../styles/Adminpage.module.css';
+import styles from '../styles/Options.module.css';
 import { setUid } from '@/store/uidSlice';
 
 const Adminpage = () => {
@@ -58,15 +58,15 @@ const Adminpage = () => {
     router.push('/admin/publications');
   };
   const changePasswordHandler = async () => {
-    const newPassword = prompt("Enter new Password");
+    const newPassword = prompt('Enter new Password');
     const updates = {
       id: 1,
       pass: newPassword,
     };
 
-    let { error } = await supabaseAdmin.from("elevate").upsert(updates);
+    let { error } = await supabaseAdmin.from('elevate').upsert(updates);
     if (!error) {
-      alert("Password updated successfully!");
+      alert('Password updated successfully!');
     }
     if (error) {
       console.log(error);
@@ -74,22 +74,25 @@ const Adminpage = () => {
   };
 
   const signOutHandler = () => {
-    sessionStorage.removeItem("signedIn");
-    router.replace("/");
+    sessionStorage.removeItem('signedIn');
+    router.replace('/');
   };
 
   return (
     <div>
       <div className={styles.options__container}>
         {/* Options */}
-        <button onClick={viewFacultiesHandler} className={styles.options}>
+        <button onClick={viewFacultiesHandler} className={styles.option}>
           View Faculties
         </button>
-        <button onClick={viewPublicationsHandler} className={styles.options}>
+        <button onClick={viewPublicationsHandler} className={styles.option}>
           View Publications
         </button>
-        <button onClick={changePasswordHandler} className={styles.options}>
+        <button onClick={changePasswordHandler} className={styles.option}>
           Change Password
+        </button>
+        <button onClick={signOutHandler} className={styles.option}>
+          Sign Out
         </button>
       </div>
 
