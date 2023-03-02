@@ -1,11 +1,10 @@
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import supabaseAdmin from "@/lib/supabaseAdmin";
-import { useEffect, useState } from "react";
-import classes from "../styles/Degree.module.css";
-import ProfileDetails from "./ProfileDetails";
-import Avatar from "./Avatar";
-import { setUid } from "@/store/uidSlice";
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import supabaseAdmin from '@/lib/supabaseAdmin';
+import { useState } from 'react';
+import classes from '../styles/Degree.module.css';
+import styles from '../styles/Adminpage.module.css';
+import { setUid } from '@/store/uidSlice';
 
 const Adminpage = () => {
   const router = useRouter();
@@ -13,10 +12,7 @@ const Adminpage = () => {
 
   const dispatch = useDispatch();
   const [users, setUsers] = useState();
-  const [showDetails, setShowDetails] = useState(false);
-  const [allDetails, setAllDetails] = useState([]);
   const [viewFaculties, setViewFaculties] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState();
   // const [uid, setUid] = useState();
 
   const completeDetailsHandler = () => {
@@ -24,7 +20,7 @@ const Adminpage = () => {
   };
 
   const viewFacultiesHandler = async () => {
-    const { data, error } = await supabaseAdmin.from("profiles").select("*");
+    const { data, error } = await supabaseAdmin.from('profiles').select('*');
     if (data) {
       setUsers(
         data.map((user) => (
@@ -32,12 +28,12 @@ const Adminpage = () => {
             className={`container ${classes.degree__container}`}
             key={user.id}
           >
-            <div style={{ margin: "1rem" }}>
-              <div style={{ margin: "1rem auto" }}>
+            <div style={{ margin: '1rem' }}>
+              <div style={{ margin: '1rem auto' }}>
                 <h2 className={classes.degree__title}>Faculty</h2>
                 <h2 className={classes.degree__name}>{user.username}</h2>
               </div>
-              <div style={{ margin: "1rem auto" }}>
+              <div style={{ margin: '1rem auto' }}>
                 <h2 className={classes.degree__title}>Mobile</h2>
                 <h2 className={classes.degree__name}>{user.mobile}</h2>
               </div>
@@ -59,17 +55,23 @@ const Adminpage = () => {
   };
 
   const viewPublicationsHandler = () => {
-    router.push("/admin/publications");
+    router.push('/admin/publications');
   };
   const changePasswordHandler = async () => {};
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div className={styles.options__container}>
         {/* Options */}
-        <button onClick={viewFacultiesHandler}>View Faculties</button>
-        <button onClick={viewPublicationsHandler}>View Publications</button>
-        <button onClick={changePasswordHandler}>Change Password</button>
+        <button onClick={viewFacultiesHandler} className={styles.options}>
+          View Faculties
+        </button>
+        <button onClick={viewPublicationsHandler} className={styles.options}>
+          View Publications
+        </button>
+        <button onClick={changePasswordHandler} className={styles.options}>
+          Change Password
+        </button>
       </div>
 
       {/* All faculties */}
