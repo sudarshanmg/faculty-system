@@ -16,6 +16,7 @@ export default function Conferences() {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState(null);
   const [name, setName] = useState(null);
+  const [author, setAuthor] = useState(null);
   const [year, setYear] = useState(null);
   const [storedConferences, setStoredConferences] = useState([]);
 
@@ -53,6 +54,7 @@ export default function Conferences() {
         title,
         name,
         year,
+        author,
       };
 
       const { data, error } = await supabase
@@ -111,6 +113,13 @@ export default function Conferences() {
             name="name"
             id="name"
             onChange={(e) => setName(e.target.value)}
+          />
+          <label htmlFor="author">Author</label>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            onChange={(e) => setAuthor(e.target.value)}
           />
           <button
             type="submit"

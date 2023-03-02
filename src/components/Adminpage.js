@@ -57,7 +57,26 @@ const Adminpage = () => {
   const viewPublicationsHandler = () => {
     router.push('/admin/publications');
   };
-  const changePasswordHandler = async () => {};
+  const changePasswordHandler = async () => {
+    const newPassword = prompt("Enter new Password");
+    const updates = {
+      id: 1,
+      pass: newPassword,
+    };
+
+    let { error } = await supabaseAdmin.from("elevate").upsert(updates);
+    if (!error) {
+      alert("Password updated successfully!");
+    }
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  const signOutHandler = () => {
+    sessionStorage.removeItem("signedIn");
+    router.replace("/");
+  };
 
   return (
     <div>

@@ -12,7 +12,7 @@ const JournalAdmin = (props) => {
         {props.showName && (
           <div style={{ margin: "1rem auto" }}>
             <h2 className={classes.degree__title}>Author</h2>
-            <h2 className={classes.degree__name}>{props.username}</h2>
+            <h2 className={classes.degree__name}>{props.journal.author}</h2>
           </div>
         )}
 
