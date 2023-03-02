@@ -24,7 +24,6 @@ const Adminpage = () => {
   };
 
   const viewFacultiesHandler = async () => {
-    setShowDetails(false);
     const { data, error } = await supabaseAdmin.from("profiles").select("*");
     if (data) {
       setUsers(
