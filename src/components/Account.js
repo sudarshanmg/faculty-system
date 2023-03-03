@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Avatar from './Avatar';
-import classes from '../styles/Account.module.css';
-import Layout from './Layout';
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient();
@@ -113,7 +111,7 @@ export default function Account({ session }) {
   }
 
   return (
-    <div style={{margin: '1rem auto'}}>
+    <div className="container">
       <Avatar
         uid={user.id}
         url={avatar_url}
@@ -138,154 +136,126 @@ export default function Account({ session }) {
         }}
       />
 
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="mobile">Mobile</label>
-        <input
-          id="mobile"
-          type="number"
-          value={mobile || ''}
-          onChange={(e) => setMobile(e.target.value)}
-        />
-      </div>
+      <label htmlFor="email">Email</label>
+      <input id="email" type="text" value={session.user.email} disabled />
 
-      <div>
-        <label htmlFor="aad">Aadhaar Number</label>
-        <input
-          id="aad"
-          type="number"
-          value={aadhaar || ''}
-          onChange={(e) => setAadhaar(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="exp">Teaching Experience</label>
-        <input
-          id="exp"
-          type="number"
-          value={experience || ''}
-          onChange={(e) => setExperience(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="dob">Date of Birth</label>
-        <input
-          id="dob"
-          type="date"
-          value={dob || ''}
-          onChange={(e) => setDob(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="sex">Sex</label>
-        <input
-          id="sex"
-          type="text"
-          value={sex || ''}
-          onChange={(e) => setSex(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="religion">Religion</label>
-        <input
-          id="religion"
-          type="text"
-          value={religion || ''}
-          onChange={(e) => setReligion(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="community">Community</label>
-        <input
-          id="community"
-          type="text"
-          value={community || ''}
-          onChange={(e) => setCommunity(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="joining_date">Joining Date</label>
-        <input
-          id="joining_date"
-          type="date"
-          value={joining_date || ''}
-          onChange={(e) => setJoiningDate(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="dept">Department</label>
-        <input
-          id="dept"
-          type="text"
-          value={department || ''}
-          onChange={(e) => setDepartment(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="res_addr">Residential Address</label>
-        <input
-          id="res_addr"
-          type="text"
-          value={residence || ''}
-          onChange={(e) => setResidence(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="pan">PAN</label>
-        <input
-          id="pan"
-          type="text"
-          value={pan || ''}
-          onChange={(e) => setPan(e.target.value)}
-        />
-      </div>
+      <label htmlFor="username">Username</label>
+      <input
+        id="username"
+        type="text"
+        value={username || ''}
+        onChange={(e) => setUsername(e.target.value)}
+      />
 
-      <div>
-        <button
-          className="button primary block"
-          onClick={() =>
-            updateProfile({
-              username,
-              avatar_url,
-              mobile,
-              aadhaar,
-              experience,
-              dob,
-              sex,
-              religion,
-              community,
-              joining_date,
-              department,
-              residence,
-              pan,
-            })
-          }
-          disabled={loading}
-        >
-          {loading ? 'Loading ...' : 'Update'}
-        </button>
-      </div>
+      <label htmlFor="mobile">Mobile</label>
+      <input
+        id="mobile"
+        type="number"
+        value={mobile || ''}
+        onChange={(e) => setMobile(e.target.value)}
+      />
 
-      <div>
-        <button
-          className="button block"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
-        </button>
-      </div>
+      <label htmlFor="aad">Aadhaar Number</label>
+      <input
+        id="aad"
+        type="number"
+        value={aadhaar || ''}
+        onChange={(e) => setAadhaar(e.target.value)}
+      />
+      <label htmlFor="exp">Teaching Experience</label>
+      <input
+        id="exp"
+        type="number"
+        value={experience || ''}
+        onChange={(e) => setExperience(e.target.value)}
+      />
+      <label htmlFor="dob">Date of Birth</label>
+      <input
+        id="dob"
+        type="date"
+        value={dob || ''}
+        onChange={(e) => setDob(e.target.value)}
+      />
+      <label htmlFor="sex">Sex</label>
+      <input
+        id="sex"
+        type="text"
+        value={sex || ''}
+        onChange={(e) => setSex(e.target.value)}
+      />
+      <label htmlFor="religion">Religion</label>
+      <input
+        id="religion"
+        type="text"
+        value={religion || ''}
+        onChange={(e) => setReligion(e.target.value)}
+      />
+      <label htmlFor="community">Community</label>
+      <input
+        id="community"
+        type="text"
+        value={community || ''}
+        onChange={(e) => setCommunity(e.target.value)}
+      />
+      <label htmlFor="joining_date">Joining Date</label>
+      <input
+        id="joining_date"
+        type="date"
+        value={joining_date || ''}
+        onChange={(e) => setJoiningDate(e.target.value)}
+      />
+      <label htmlFor="dept">Department</label>
+      <input
+        id="dept"
+        type="text"
+        value={department || ''}
+        onChange={(e) => setDepartment(e.target.value)}
+      />
+      <label htmlFor="res_addr">Residential Address</label>
+      <input
+        id="res_addr"
+        type="text"
+        value={residence || ''}
+        onChange={(e) => setResidence(e.target.value)}
+      />
+      <label htmlFor="pan">PAN</label>
+      <input
+        id="pan"
+        type="text"
+        value={pan || ''}
+        onChange={(e) => setPan(e.target.value)}
+      />
+      <button
+        className="button primary block"
+        style={{ marginTop: '1rem' }}
+        onClick={() =>
+          updateProfile({
+            username,
+            avatar_url,
+            mobile,
+            aadhaar,
+            experience,
+            dob,
+            sex,
+            religion,
+            community,
+            joining_date,
+            department,
+            residence,
+            pan,
+          })
+        }
+        disabled={loading}
+      >
+        {loading ? 'Loading ...' : 'Update'}
+      </button>
+      <button
+        className="button block"
+        style={{ margin: '1rem auto' }}
+        onClick={() => supabase.auth.signOut()}
+      >
+        Sign Out
+      </button>
     </div>
   );
 }
