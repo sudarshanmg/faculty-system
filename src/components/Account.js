@@ -135,6 +135,13 @@ export default function Account({ session }) {
           });
         }}
       />
+      <button
+        className="button block"
+        style={{ margin: '1rem auto' }}
+        onClick={() => supabase.auth.signOut()}
+      >
+        Sign Out
+      </button>
 
       <label htmlFor="email">Email</label>
       <input id="email" type="text" value={session.user.email} disabled />
@@ -248,13 +255,6 @@ export default function Account({ session }) {
         disabled={loading}
       >
         {loading ? 'Loading ...' : 'Update'}
-      </button>
-      <button
-        className="button block"
-        style={{ margin: '1rem auto' }}
-        onClick={() => supabase.auth.signOut()}
-      >
-        Sign Out
       </button>
     </div>
   );
