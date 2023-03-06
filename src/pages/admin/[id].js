@@ -1,12 +1,12 @@
-import supabaseAdmin from "@/lib/supabaseAdmin";
-import { useEffect, useState } from "react";
-import classes from "../../styles/Degree.module.css";
-import { useSelector } from "react-redux";
-import Avatar from "@/components/Avatar";
-import { useRouter } from "next/router";
-import DegreeAdmin from "@/components/DegreeAdmin";
-import JournalAdmin from "@/components/JournalAdmin";
-import DocumentAdmin from "@/components/DocumentAdmin";
+import supabaseAdmin from '@/lib/supabaseAdmin';
+import { useEffect, useState } from 'react';
+import classes from '../../styles/Degree.module.css';
+import { useSelector } from 'react-redux';
+import Avatar from '@/components/Avatar';
+import { useRouter } from 'next/router';
+import DegreeAdmin from '@/components/DegreeAdmin';
+import JournalAdmin from '@/components/JournalAdmin';
+import DocumentAdmin from '@/components/DocumentAdmin';
 
 const User = () => {
   const [facultyDetails, setFacultyDetails] = useState({});
@@ -17,33 +17,31 @@ const User = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (sessionStorage.getItem("signedIn") !== "true") {
-        router.replace("/");
-      }
+    if (sessionStorage.getItem('signedIn') !== 'true') {
+      router.replace('/');
     }
     const getFacultyDetails = async (id) => {
       try {
         let { data: profile, error: profile_error } = await supabaseAdmin
-          .from("profiles")
+          .from('profiles')
           .select(`*`)
-          .eq("id", id);
+          .eq('id', id);
         let { data: qualifications, error: qualifications_error } =
           await supabaseAdmin
-            .from("qualifications")
+            .from('qualifications')
             .select(`*`)
-            .eq("user_id", id);
+            .eq('user_id', id);
         let { data: journals, error: journals_error } = await supabaseAdmin
-          .from("journals")
+          .from('journals')
           .select(`*`)
-          .eq("user_id", id);
+          .eq('user_id', id);
         let { data: documents, error: docs_error } = await supabaseAdmin
-          .from("documents")
+          .from('documents')
           .select(`*`)
-          .eq("user_id", id);
+          .eq('user_id', id);
 
         if (profile_error) {
-          console.log("sdhjb");
+          console.log('sdhjb');
         }
         if (qualifications_error) {
           console.log(qualifications_error);
@@ -85,8 +83,8 @@ const User = () => {
         alert(error);
       }
       if (data) {
-        alert("Faculty deleted successfully!");
-        router.replace("/admin/admin");
+        alert('Faculty deleted successfully!');
+        router.replace('/admin/admin');
       }
     } catch (error) {
       console.log(error);
@@ -102,12 +100,12 @@ const User = () => {
         <h1 className="head_center">
           {facultyDetails.username + "'s Profile"}
         </h1>
-        <div style={{ margin: "1rem" }}>
+        <div style={{ margin: '1rem' }}>
           <div
             style={{
-              margin: "1rem auto",
-              display: "flex",
-              justifyContent: "center",
+              margin: '1rem auto',
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             <Avatar
@@ -117,55 +115,55 @@ const User = () => {
               size={150}
             />
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Name</h2>
             <h2 className={classes.degree__name}>{facultyDetails.username}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>DOB</h2>
             <h2 className={classes.degree__name}>{facultyDetails.dob}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Sex</h2>
             <h2 className={classes.degree__name}>{facultyDetails.sex}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Mobile</h2>
             <h2 className={classes.degree__name}>{facultyDetails.mobile}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Religion</h2>
             <h2 className={classes.degree__name}>{facultyDetails.religion}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Community</h2>
             <h2 className={classes.degree__name}>{facultyDetails.community}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Address</h2>
             <h2 className={classes.degree__name}>{facultyDetails.residence}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Aadhaar</h2>
             <h2 className={classes.degree__name}>{facultyDetails.aadhaar}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Pan</h2>
             <h2 className={classes.degree__name}>{facultyDetails.pan}</h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Department</h2>
             <h2 className={classes.degree__name}>
               {facultyDetails.department}
             </h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Experience</h2>
             <h2 className={classes.degree__name}>
               {facultyDetails.experience}
             </h2>
           </div>
-          <div style={{ margin: "1rem auto" }}>
+          <div style={{ margin: '1rem auto' }}>
             <h2 className={classes.degree__title}>Joining Date</h2>
             <h2 className={classes.degree__name}>
               {facultyDetails.joining_date}

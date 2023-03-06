@@ -40,8 +40,9 @@ const Adminpage = () => {
               <button
                 className="button primary block"
                 onClick={() => {
+                  console.log(user.id);
                   dispatch(setUid(user.id));
-                  completeDetailsHandler();
+                  return completeDetailsHandler();
                 }}
               >
                 View Profile
