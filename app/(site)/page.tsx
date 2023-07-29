@@ -16,6 +16,7 @@ export default function Home() {
   const authModal = useAuthModal();
   const router = useRouter();
   const { session } = useSessionContext();
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
   return (
     <>
