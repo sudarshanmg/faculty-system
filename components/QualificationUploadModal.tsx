@@ -2,6 +2,7 @@
 
 // Hooks
 import React, { useState } from "react";
+import useQualificationUploadModal from "@/hooks/useQualificationUploadModal";
 import { useUser } from "@/hooks/useUser";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -13,12 +14,11 @@ import { toast } from "react-hot-toast";
 import Modal from "./Modal";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import useJournalUploadModal from "@/hooks/useJournalUploadModal";
 
-const JournalUploadModal = () => {
+const QualificationUploadModal = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const uploadModal = useJournalUploadModal();
+  const uploadModal = useQualificationUploadModal();
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
 
@@ -28,7 +28,7 @@ const JournalUploadModal = () => {
       title: "",
       url: "",
       year: null,
-      journal: null,
+      qualification: null,
     },
   });
 
@@ -43,7 +43,7 @@ const JournalUploadModal = () => {
     try {
       setIsLoading(true);
 
-      const journalFile = values.journal?.[0];
+      const qualificationFile = values.qualification?.[0];
 
       if (!user) {
         toast.error("Missing fields");
@@ -52,32 +52,35 @@ const JournalUploadModal = () => {
 
       const uniqueID = uniqid();
 
-      if (journalFile) {
-        // Upload journal
-        const { data: journalData, error: journalError } =
+      if (qualificationFile) {
+        // Upload qualification
+        const { data: qualificationData, error: qualificationError } =
           await supabaseClient.storage
-            .from("journals")
-            .upload(`journal-${values.title}-${uniqueID}`, journalFile, {
-              cacheControl: "3600",
-              upsert: false,
-            });
+            .from("qualifications")
+            .upload(
+              `qualification-${values.title}-${uniqueID}`,
+              qualificationFile,
+              {
+                cacheControl: "3600",
+                upsert: false,
+              }
+            );
 
-        if (journalError) {
+        if (qualificationError) {
           setIsLoading(false);
-          return toast.error("Failed journal upload");
+          return toast.error("Failed qualification upload");
         }
 
         // Create record
         const { error: supabaseError } = await supabaseClient
-          .from("journals")
+          .from("qualifications")
           .insert({
             user_id: user.id,
             title: values.title,
-            authors: values.authors,
             description: values.description,
-            journal_path: journalData.path,
+            subject: values.subject,
+            qualification_path: qualificationData.path,
             year: values.year,
-            url: values.url,
           });
 
         if (supabaseError) {
@@ -85,15 +88,13 @@ const JournalUploadModal = () => {
         }
       } else {
         const { error: supabaseError } = await supabaseClient
-          .from("journals")
+          .from("qualifications")
           .insert({
             user_id: user.id,
             title: values.title,
-            authors: values.authors,
-            description: values.description,
-            journal_path: null,
+            subject: values.subject,
+            qualification_path: null,
             year: values.year,
-            url: values.url,
           });
 
         if (supabaseError) {
@@ -102,7 +103,7 @@ const JournalUploadModal = () => {
       }
 
       setIsLoading(false);
-      toast.success("Journal added!");
+      toast.success("qualification added!");
 
       window.location.reload();
       reset();
@@ -116,7 +117,7 @@ const JournalUploadModal = () => {
 
   return (
     <Modal
-      title="Add a journal"
+      title="Add a qualification"
       description="Upload a file"
       isOpen={uploadModal.isOpen}
       onChange={onChange}
@@ -126,13 +127,7 @@ const JournalUploadModal = () => {
           id="title"
           disabled={isLoading}
           {...register("title", { required: true })}
-          placeholder="Journal title"
-        />
-        <Input
-          id="authors"
-          disabled={isLoading}
-          {...register("authors", { required: true })}
-          placeholder="Authors"
+          placeholder="Qualification title"
         />
         <Input
           id="year"
@@ -141,25 +136,19 @@ const JournalUploadModal = () => {
           placeholder="Year"
         />
         <Input
-          id="url"
+          id="subject"
           disabled={isLoading}
-          {...register("url")}
-          placeholder="url"
-        />
-        <Input
-          id="description"
-          disabled={isLoading}
-          {...register("description", { required: true })}
-          placeholder="description"
+          {...register("subject", { required: true })}
+          placeholder="Subject"
         />
         <div>
           <div className="pb-1">Select a file</div>
           <Input
-            placeholder="test"
+            placeholder="Add a file"
             disabled={isLoading}
             type="file"
-            id="journal"
-            {...register("journal")}
+            id="qualification"
+            {...register("qualification")}
           />
         </div>
         <Button disabled={isLoading} type="submit">
@@ -170,4 +159,4 @@ const JournalUploadModal = () => {
   );
 };
 
-export default JournalUploadModal;
+export default QualificationUploadModal;

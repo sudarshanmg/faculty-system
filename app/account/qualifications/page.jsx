@@ -3,34 +3,34 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 // Actions
-import { fetchJournal } from "@/actions/getJournalsByUserId";
+import { fetchQualification } from "@/actions/getQualificationsByUserId";
 
 // Hooks
 import { useEffect, useState } from "react";
-import useUploadModal from "@/hooks/useJournalUploadModal";
+import useQualificationUploadModal from "@/hooks/useQualificationUploadModal";
 
 // UI
 import Header from "@/components/ui/Header";
 import { Button } from "@/components/ui/button";
 import { BounceLoader } from "react-spinners";
-import JournalBox from "@/components/JournalBox";
+import QualificationBox from "@/components/QualificationBox";
 
-export default function Journals() {
+export default function Qualifications() {
   const [loading, setLoading] = useState(false);
-  const [journals, setJournals] = useState([]);
-  const uploadModal = useUploadModal();
+  const [qualifications, setQualifications] = useState([]);
+  const uploadModal = useQualificationUploadModal();
   const supabase = createClientComponentClient();
 
   useEffect(() => {
-    const fetchJournals = async () => {
+    const fetchQualifications = async () => {
       setLoading(true);
       const { data } = await supabase.auth.getSession();
       const userId = data.session?.user.id;
-      const docs = await fetchJournal(userId);
+      const docs = await fetchQualification(userId);
       setLoading(false);
-      setJournals(docs);
+      setQualifications(docs);
     };
-    fetchJournals();
+    fetchQualifications();
   }, [supabase]);
 
   const onClick = () => {
@@ -40,26 +40,24 @@ export default function Journals() {
   return (
     <div className="flex flex-col w-full items-center">
       <header>
-        <Header text="Journals" />
+        <Header text="Qualifications" />
       </header>
       <section className="flex flex-col items-center w-4/5">
         <Button onClick={onClick} className="w-4/5 m-4" variant={"outline"}>
-          Upload Journal
+          Upload File
         </Button>
-        {journals.length > 0 ? (
-          journals.map((journal) => (
+        {qualifications.length > 0 ? (
+          qualifications.map((qualification) => (
             <div
-              key={journal.id}
+              key={qualification.id}
               className="w-full flex items-center justify-center"
             >
-              <JournalBox
-                title={journal.title}
-                description={journal.description}
-                year={journal.year}
-                authors={journal.authors}
-                url={journal.url}
-                journal_path={journal.journal_path}
-                journal_id={journal.id}
+              <QualificationBox
+                title={qualification.title}
+                subject={qualification.subject}
+                year={qualification.year}
+                qualification_path={qualification.qualification_path}
+                qualification_id={qualification.id}
               />
             </div>
           ))
@@ -68,7 +66,7 @@ export default function Journals() {
             <BounceLoader size={20} color="#ffffff" />
           </div>
         ) : (
-          <div>No journals</div>
+          <div>Nothing added.</div>
         )}
       </section>
     </div>

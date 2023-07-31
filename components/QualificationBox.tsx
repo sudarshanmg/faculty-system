@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+// Hooks
+import React, { useState } from "react";
+
+// UI
 import { Button } from "./ui/button";
-import { getJournalFile } from "@/actions/getJournalFile";
-import { deleteJournalFile } from "@/actions/deleteJournalFile";
 import { ClipLoader } from "react-spinners";
 
-const Box = (props: any) => {
+// Actions
+import { getQualificationFile } from "@/actions/getQualificationFile";
+import { deleteQualificationFile } from "@/actions/deleteQualificationFile";
+
+const QualificationBox = (props: any) => {
   const [deleteLoading, setDeleteLoading] = useState<boolean | undefined>(
     false
   );
@@ -14,7 +19,10 @@ const Box = (props: any) => {
   return (
     <article className="my-8 p-8 w-4/5 border border-solid rounded-lg border-neutral-600 bg-neutral-800">
       {Object.entries(props)?.map((prop, index) => {
-        if (prop[0] !== "journal_path" && prop[0] !== "journal_id") {
+        if (
+          prop[0] !== "qualification_path" &&
+          prop[0] !== "qualification_id"
+        ) {
           return (
             <div key={index}>
               <h1 className="text-lg font-semibold">
@@ -29,12 +37,13 @@ const Box = (props: any) => {
         }
       })}
       <div className="my-4 flex">
-        {props.journal_path && (
+        {props.qualification_path && (
           <>
             <Button
               onClick={() =>
-                getJournalFile(props.journal_path, setDownloadLoading)
+                getQualificationFile(props.qualification_id, setDownloadLoading)
               }
+              disabled={downloadLoading}
               className="mr-4"
             >
               {downloadLoading ? (
@@ -52,7 +61,10 @@ const Box = (props: any) => {
           onClick={async () => {
             setDeleteLoading(true);
             setDeleteLoading(
-              await deleteJournalFile(props.journal_path, props.journal_id)
+              await deleteQualificationFile(
+                props.qualification_path,
+                props.qualification_id
+              )
             );
             window.location.reload();
           }}
@@ -64,7 +76,7 @@ const Box = (props: any) => {
               <ClipLoader size={15} color="#fff" className="mx-2" /> Deleting
             </>
           ) : (
-            "Delete journal"
+            "Delete"
           )}
         </Button>
       </div>
@@ -72,4 +84,4 @@ const Box = (props: any) => {
   );
 };
 
-export default Box;
+export default QualificationBox;

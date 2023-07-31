@@ -6,10 +6,10 @@ interface UploadModal {
   onClose: () => void;
 }
 
-const useUploadModal = create<UploadModal>((set) => ({
+const useQualificationUploadModal = create<UploadModal>((set) => ({
   isOpen: false,
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));
 
-export default useUploadModal;
+export default useQualificationUploadModal;

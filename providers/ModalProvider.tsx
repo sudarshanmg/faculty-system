@@ -2,6 +2,7 @@
 
 import AuthModal from "@/components/AuthModal";
 import JournalUploadModal from "@/components/JournalUploadModal";
+import QualificationUploadModal from "@/components/QualificationUploadModal";
 import { useEffect, useState } from "react";
 
 const ModalProvider = () => {
@@ -19,6 +20,7 @@ const ModalProvider = () => {
     <>
       <AuthModal />
       <JournalUploadModal />
+      <QualificationUploadModal />
     </>
   );
 };

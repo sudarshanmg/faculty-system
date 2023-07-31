@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/account/journals/page.jsx",
-    "actions/getJournalsByUserId.js"
+    "actions/getJournalsByUserId.js",
+    "app/account/qualifications/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
